@@ -67,7 +67,7 @@ end)
 RegisterNetEvent('dsAdminMenu:server:kill', function(player)
     local src = source
     if havePermission(src, Config.Permissions['kill'])   then
-        TriggerClientEvent("dsAdminMenu:killPlayer", player.id)
+        TriggerClientEvent("dsAdminMenu:client:killPlayer", player.id)
     else
         DropPlayer(src, _U('info.banned', 'Exploiting'))
     end
@@ -76,7 +76,7 @@ end)
 RegisterNetEvent('dsAdminMenu:server:revive', function(player)
     local src = source
     if havePermission(src, Config.Permissions['revive'])   then
-        TriggerClientEvent('dsAdminMenu:client:revive', player.id)
+        TriggerClientEvent('esx_ambulancejob:revive', player.id)
         if Config.EnableWebhooks then
             TriggerEvent('dsAdminMenu:server:CreateLog', 'revive', 'Player Revived', 'red', string.format('%s was kicked by %s for %s', GetPlayerName(player.id), GetPlayerName(src), reason), true)
         end
@@ -255,9 +255,10 @@ RegisterNetEvent('dsAdminMenu:server:cloth', function(player)
     local src = source
     if havePermission(src, Config.Permissions['clothing']) then
         if Config.Clothing == 'illenium_appearance' then
-            TriggerEvent("illenium-appearance:client:openClothingShopMenu", player.id, true)
+            --TriggerClientEvent('esx_skin:openSaveableMenu', player.id)
+            TriggerClientEvent("illenium-appearance:client:openClothingShopMenu", player.id, true)
         elseif Config.Clothing == 'esx_skin' then
-            TriggerEvent('esx_skin:openSaveableMenu', player.id)
+            TriggerClientEvent('esx_skin:openSaveableMenu', player.id)
         elseif Config.Clothing == 'custom' then
             --Insert Custom Trigger Here
         end

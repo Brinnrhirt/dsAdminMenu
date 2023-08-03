@@ -1,5 +1,4 @@
 
-ESX = exports['es_extended']:getSharedObject()
 
 local banlength = nil
 local developermode = false
@@ -7,17 +6,30 @@ local showCoords = false
 local vehicleDevMode = false
 local banreason = 'Unknown'
 local kickreason = 'Unknown'
-local menuLocation = 'topright' -- e.g. topright (default), topleft, bottomright, bottomleft
+local menuLocation = Config.MenuLocation
+
+if Config.ESXOldVersion then
+    ESX = nil
+    Citizen.CreateThread(function()
+        while ESX == nil do
+            TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+            Citizen.Wait(0)
+        end
+    end)
+end
+
 -- Main Menus
 menu1 = MenuV:CreateMenu(false, _U("menu.admin_menu"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test1')
 local menu2 = MenuV:CreateMenu(false, _U("menu.admin_options"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test2')
-local menu3 = MenuV:CreateMenu(false, _U("menu.manage_server"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test3')
 local menu4 = MenuV:CreateMenu(false, _U("menu.online_players"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test4')
 local menu5 = MenuV:CreateMenu(false, _U("menu.vehicle_options"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test5')
 local menu7 = MenuV:CreateMenu(false, _U("menu.developer_options"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test7')
 
 --Sub Menus
-local menu8 = MenuV:CreateMenu(false, _U("menu.weather_conditions"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test8')
+if Config.ActivateWeatherMenu then
+    menu3 = MenuV:CreateMenu(false, _U("menu.manage_server"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test3')
+    menu8 = MenuV:CreateMenu(false, _U("menu.weather_conditions"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test8')
+end
 local menu9 = MenuV:CreateMenu(false, _U("menu.ban"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test9')
 local menu10 = MenuV:CreateMenu(false, _U("menu.kick"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test10')
 menu11 = MenuV:CreateMenu(false, _U("menu.permissions"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test11')
@@ -48,14 +60,15 @@ local player_management = menu1:AddButton({
     value = menu4,
     description = _U("desc.player_management_desc")
 })
-
---server management
-menu1:AddButton({
-    icon = '🎮',
-    label = _U("menu.server_management"),
-    value = menu3,
-    description = _U("desc.server_management_desc")
-})
+if Config.ActivateWeatherMenu then
+    --server management
+    menu1:AddButton({
+        icon = '🎮',
+        label = _U("menu.server_management"),
+        value = menu3,
+        description = _U("desc.server_management_desc")
+    })
+end
 
 --vehicle spawner
 menu1:AddButton({
@@ -128,117 +141,117 @@ menu2:AddButton({
     description = _U("desc.spawn_weapons_desc")
 })
 
+if Config.ActivateWeatherMenu then
 -- Server Options Menu Buttons
-local menu3_server_weather = menu3:AddButton({
-    icon = '🌡️',
-    label = _U("menu.weather_options"),
-    value = menu8,
-    description = _U("desc.weather_desc")
-})
-
-local menu3_server_time = menu3:AddSlider({
-    icon = '⏲️',
-    label = _U("menu.server_time"),
-    value = GetClockHours(),
-    values = {{
-        label = '00',
-        value = '00',
-        description = _U("menu.time")
-    }, {
-        label = '01',
-        value = '01',
-        description = _U("menu.time")
-    }, {
-        label = '02',
-        value = '02',
-        description = _U("menu.time")
-    }, {
-        label = '03',
-        value = '03',
-        description = _U("menu.time")
-    }, {
-        label = '04',
-        value = '04',
-        description = _U("menu.time")
-    }, {
-        label = '05',
-        value = '05',
-        description = _U("menu.time")
-    }, {
-        label = '06',
-        value = '06',
-        description = _U("menu.time")
-    }, {
-        label = '07',
-        value = '07',
-        description = _U("menu.time")
-    }, {
-        label = '08',
-        value = '08',
-        description = _U("menu.time")
-    }, {
-        label = '09',
-        value = '09',
-        description = _U("menu.time")
-    }, {
-        label = '10',
-        value = '10',
-        description = _U("menu.time")
-    }, {
-        label = '11',
-        value = '11',
-        description = _U("menu.time")
-    }, {
-        label = '12',
-        value = '12',
-        description = _U("menu.time")
-    }, {
-        label = '13',
-        value = '13',
-        description = _U("menu.time")
-    }, {
-        label = '14',
-        value = '14',
-        description = _U("menu.time")
-    }, {
-        label = '15',
-        value = '15',
-        description = _U("menu.time")
-    }, {
-        label = '16',
-        value = '16',
-        description = _U("menu.time")
-    }, {
-        label = '17',
-        value = '17',
-        description = _U("menu.time")
-    }, {
-        label = '18',
-        value = '18',
-        description = _U("menu.time")
-    }, {
-        label = '19',
-        value = '19',
-        description = _U("menu.time")
-    }, {
-        label = '20',
-        value = '20',
-        description = _U("menu.time")
-    }, {
-        label = '21',
-        value = '21',
-        description = _U("menu.time")
-    }, {
-        label = '22',
-        value = '22',
-        description = _U("menu.time")
-    }, {
-        label = '23',
-        value = '23',
-        description = _U("menu.time")
-    }}
-})
-
+    menu3_server_weather = menu3:AddButton({
+        icon = '🌡️',
+        label = _U("menu.weather_options"),
+        value = menu8,
+        description = _U("desc.weather_desc")
+    })
+    menu3_server_time = menu3:AddSlider({
+        icon = '⏲️',
+        label = _U("menu.server_time"),
+        value = GetClockHours(),
+        values = {{
+            label = '00',
+            value = '00',
+            description = _U("menu.time")
+        }, {
+            label = '01',
+            value = '01',
+            description = _U("menu.time")
+        }, {
+            label = '02',
+            value = '02',
+            description = _U("menu.time")
+        }, {
+            label = '03',
+            value = '03',
+            description = _U("menu.time")
+        }, {
+            label = '04',
+            value = '04',
+            description = _U("menu.time")
+        }, {
+            label = '05',
+            value = '05',
+            description = _U("menu.time")
+        }, {
+            label = '06',
+            value = '06',
+            description = _U("menu.time")
+        }, {
+            label = '07',
+            value = '07',
+            description = _U("menu.time")
+        }, {
+            label = '08',
+            value = '08',
+            description = _U("menu.time")
+        }, {
+            label = '09',
+            value = '09',
+            description = _U("menu.time")
+        }, {
+            label = '10',
+            value = '10',
+            description = _U("menu.time")
+        }, {
+            label = '11',
+            value = '11',
+            description = _U("menu.time")
+        }, {
+            label = '12',
+            value = '12',
+            description = _U("menu.time")
+        }, {
+            label = '13',
+            value = '13',
+            description = _U("menu.time")
+        }, {
+            label = '14',
+            value = '14',
+            description = _U("menu.time")
+        }, {
+            label = '15',
+            value = '15',
+            description = _U("menu.time")
+        }, {
+            label = '16',
+            value = '16',
+            description = _U("menu.time")
+        }, {
+            label = '17',
+            value = '17',
+            description = _U("menu.time")
+        }, {
+            label = '18',
+            value = '18',
+            description = _U("menu.time")
+        }, {
+            label = '19',
+            value = '19',
+            description = _U("menu.time")
+        }, {
+            label = '20',
+            value = '20',
+            description = _U("menu.time")
+        }, {
+            label = '21',
+            value = '21',
+            description = _U("menu.time")
+        }, {
+            label = '22',
+            value = '22',
+            description = _U("menu.time")
+        }, {
+            label = '23',
+            value = '23',
+            description = _U("menu.time")
+        }}
+    })
+end
 -- Vehicle Spawner Menu Buttons
 local menu5_vehicles_spawn = menu5:AddButton({
     icon = '🚗',
@@ -378,7 +391,7 @@ end)
 
 -- Revive Self
 menu2_admin_revive:On('select', function(_)
-    TriggerEvent('dsAdminMenu:client:revive', PlayerPedId())
+    TriggerServerEvent('dsAdminMenu:server:revive',GetPlayerServerId(PlayerPedId()))
 end)
 
 -- Invisible
@@ -661,122 +674,124 @@ player_management:On('select', function(_)
     end)
 end)
 
+if Config.ActivateWeatherMenu then
+    --[[
+        Server Options functions
+    --]]
 
---[[
-    Server Options functions
---]]
+    -- Adjust weather on change
+    menu3_server_weather:On("select",function()
+        menu8:ClearItems()
+        local elements = {
+            [1] = {
+                icon = '☀️',
+                label = _U("weather.extra_sunny"),
+                value = "EXTRASUNNY",
+                description = _U("weather.extra_sunny_desc")
+            },
+            [2] = {
+                icon = '☀️',
+                label = _U("weather.clear"),
+                value = "CLEAR",
+                description = _U("weather.clear_desc")
+            },
+            [3] = {
+                icon = '☀️',
+                label = _U("weather.neutral"),
+                value = "NEUTRAL",
+                description = _U("weather.neutral_desc")
+            },
+            [4] = {
+                icon = '🌁',
+                label = _U("weather.smog"),
+                value = "SMOG",
+                description = _U("weather.smog_desc")
+            },
+            [5] = {
+                icon = '🌫️',
+                label = _U("weather.foggy"),
+                value = "FOGGY",
+                description = _U("weather.foggy_desc")
+            },
+            [6] = {
+                icon = '⛅',
+                label = _U("weather.overcast"),
+                value = "OVERCAST",
+                description = _U("weather.overcast_desc")
+            },
+            [7] = {
+                icon = '☁️',
+                label = _U("weather.clouds"),
+                value = "CLOUDS",
+                description = _U("weather.clouds_desc")
+            },
+            [8] = {
+                icon = '🌤️',
+                label = _U("weather.clearing"),
+                value = "CLEARING",
+                description = _U("weather.clearing_desc")
+            },
+            [9] = {
+                icon = '☂️',
+                label = _U("weather.rain"),
+                value = "RAIN",
+                description = _U("weather.rain_desc")
+            },
 
--- Adjust weather on change
-menu3_server_weather:On("select",function()
-    menu8:ClearItems()
-    local elements = {
-        [1] = {
-            icon = '☀️',
-            label = _U("weather.extra_sunny"),
-            value = "EXTRASUNNY",
-            description = _U("weather.extra_sunny_desc")
-        },
-        [2] = {
-            icon = '☀️',
-            label = _U("weather.clear"),
-            value = "CLEAR",
-            description = _U("weather.clear_desc")
-        },
-        [3] = {
-            icon = '☀️',
-            label = _U("weather.neutral"),
-            value = "NEUTRAL",
-            description = _U("weather.neutral_desc")
-        },
-        [4] = {
-            icon = '🌁',
-            label = _U("weather.smog"),
-            value = "SMOG",
-            description = _U("weather.smog_desc")
-        },
-        [5] = {
-            icon = '🌫️',
-            label = _U("weather.foggy"),
-            value = "FOGGY",
-            description = _U("weather.foggy_desc")
-        },
-        [6] = {
-            icon = '⛅',
-            label = _U("weather.overcast"),
-            value = "OVERCAST",
-            description = _U("weather.overcast_desc")
-        },
-        [7] = {
-            icon = '☁️',
-            label = _U("weather.clouds"),
-            value = "CLOUDS",
-            description = _U("weather.clouds_desc")
-        },
-        [8] = {
-            icon = '🌤️',
-            label = _U("weather.clearing"),
-            value = "CLEARING",
-            description = _U("weather.clearing_desc")
-        },
-        [9] = {
-            icon = '☂️',
-            label = _U("weather.rain"),
-            value = "RAIN",
-            description = _U("weather.rain_desc")
-        },
-
-        [10] = {
-            icon = '⛈️',
-            label = _U("weather.thunder"),
-            value = "THUNDER",
-            description = _U("weather.thunder_desc")
-        },
-        [11] = {
-            icon = '❄️',
-            label = _U("weather.snow"),
-            value = "SNOW",
-            description = _U("weather.snow_desc")
-        },
-        [12] = {
-            icon = '🌨️',
-            label = _U("weather.blizzard"),
-            value = "BLIZZARD",
-            description = _U("weather.blizzed_desc")
-        },
-        [13] = {
-            icon = '❄️',
-            label = _U("weather.light_snow"),
-            value = "SNOWLIGHT",
-            description = _U("weather.light_snow_desc")
-        },
-        [14] = {
-            icon = '🌨️',
-            label = _U("weather.heavy_snow"),
-            value = "XMAS",
-            description = _U("weather.heavy_snow_desc")
-        },
-        [15] = {
-            icon = '🎃',
-            label = _U("weather.halloween"),
-            value = "HALLOWEEN",
-            description = _U("weather.halloween_desc")
+            [10] = {
+                icon = '⛈️',
+                label = _U("weather.thunder"),
+                value = "THUNDER",
+                description = _U("weather.thunder_desc")
+            },
+            [11] = {
+                icon = '❄️',
+                label = _U("weather.snow"),
+                value = "SNOW",
+                description = _U("weather.snow_desc")
+            },
+            [12] = {
+                icon = '🌨️',
+                label = _U("weather.blizzard"),
+                value = "BLIZZARD",
+                description = _U("weather.blizzed_desc")
+            },
+            [13] = {
+                icon = '❄️',
+                label = _U("weather.light_snow"),
+                value = "SNOWLIGHT",
+                description = _U("weather.light_snow_desc")
+            },
+            [14] = {
+                icon = '🌨️',
+                label = _U("weather.heavy_snow"),
+                value = "XMAS",
+                description = _U("weather.heavy_snow_desc")
+            },
+            [15] = {
+                icon = '🎃',
+                label = _U("weather.halloween"),
+                value = "HALLOWEEN",
+                description = _U("weather.halloween_desc")
+            }
         }
-    }
-    for _, v in ipairs(elements) do
-        menu8:AddButton({icon = v.icon,label = v.label,value = v,description = v.description,select = function(btn)
-            local selection = btn.Value
-            TriggerServerEvent('qb-weathersync:server:setWeather', selection.value)
-            ESX.ShowNotification(_U("weather.weather_changed", {value = selection.label}))
-        end})
-    end
-end)
+        for _, v in ipairs(elements) do
+            menu8:AddButton({icon = v.icon,label = v.label,value = v,description = v.description,select = function(btn)
+                local selection = btn.Value
+                TriggerEvent('vSync:updateWeather', selection.value)
+                TriggerServerEvent('vSync:requestSync')
+                ESX.ShowNotification(_U("weather.weather_changed"))
+            end})
+        end
+    end)
 
--- Adjust time on change
-menu3_server_time:On("select", function(_, value)
-    TriggerServerEvent("qb-weathersync:server:setTime", value, value)
-    ESX.ShowNotification(_U("time.changed", {time = value}))
-end)
-
+    -- Adjust time on change
+    menu3_server_time:On("select", function(_, value)
+        TriggerEvent('vSync:updateTime', value)
+        TriggerServerEvent('vSync:requestSync')
+        ESX.ShowNotification(_U("time.changed"))
+    end)
+end
 --[[
     Vehicle Spawner functions
 --]]
@@ -1085,7 +1100,7 @@ end)
 
 entity_view_distance:On("select", function(_, value)
     SetEntityViewDistance(value)
-    ESX.ShowNotification(_U("info.entity_view_distance", {distance = value}))
+    ESX.ShowNotification(_U("info.entity_view_distance"))
 end)
 
 entity_view_vehicle:On('change', function()

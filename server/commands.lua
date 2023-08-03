@@ -9,6 +9,11 @@ ESX.RegisterCommand('maxmods', Config.Permissions['maxmods'], function(xPlayer, 
     TriggerClientEvent('dsAdminMenu:client:maxmodVehicle', src)
 end, false)
 
+ESX.RegisterCommand('fix', Config.Permissions['fix'], function(xPlayer, args, showError)
+    local src = xPlayer.source
+    TriggerClientEvent('dsAdminMenu:client:FixVehicle', src)
+end, false)
+
 ESX.RegisterCommand('blips', Config.Permissions['kick'], function(xPlayer, args, showError)
     local src = xPlayer.source
     TriggerClientEvent('dsAdminMenu:client:toggleBlips', src)

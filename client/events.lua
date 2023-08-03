@@ -1,20 +1,61 @@
 -- Variables
 ESX = exports['es_extended']:getSharedObject()
 
+local lastSpectateCoord = nil
+local isSpectating = false
 
 RegisterNetEvent("dsAdminMenu:client:killPlayer")
 AddEventHandler("dsAdminMenu:client:killPlayer", function(ped)
     SetEntityHealth(PlayerPedId(), 0)
 end)
 
-
-RegisterNetEvent("dsAdminMenu:client:revive")
-AddEventHandler("dsAdminMenu:client:revive", function(id)
-    if Config.ReviveTrigger == 'esx_ambulancejob' then
-        TriggerEvent('esx_ambulancejob:revive', id)
-    elseif Config.ReviveTrigger == 'custom' then
-        --Insert Custom Trigger Here
+RegisterNetEvent('dsAdminMenu:client:spectate', function(targetPed)
+    local myPed = PlayerPedId()
+    local targetplayer = GetPlayerFromServerId(targetPed)
+    local target = GetPlayerPed(targetplayer)
+    if not isSpectating then
+        isSpectating = true
+        SetEntityVisible(myPed, false) -- Set invisible
+        SetEntityCollision(myPed, false, false) -- Set collision
+        SetEntityInvincible(myPed, true) -- Set invincible
+        NetworkSetEntityInvisibleToNetwork(myPed, true) -- Set invisibility
+        lastSpectateCoord = GetEntityCoords(myPed) -- save my last coords
+        NetworkSetInSpectatorMode(true, target) -- Enter Spectate Mode
+    else
+        isSpectating = false
+        NetworkSetInSpectatorMode(false, target) -- Remove From Spectate Mode
+        NetworkSetEntityInvisibleToNetwork(myPed, false) -- Set Visible
+        SetEntityCollision(myPed, true, true) -- Set collision
+        SetEntityCoords(myPed, lastSpectateCoord) -- Return Me To My Coords
+        SetEntityVisible(myPed, true) -- Remove invisible
+        SetEntityInvincible(myPed, false) -- Remove godmode
+        lastSpectateCoord = nil -- Reset Last Saved Coords
     end
+end)
+
+RegisterNetEvent('dsAdminMenu:client:FixVehicle')
+AddEventHandler('dsAdminMenu:client:FixVehicle', function()
+	local playerPed = PlayerPedId()
+	local coords = GetEntityCoords(playerPed)
+
+	if IsAnyVehicleNearPoint(coords.x, coords.y, coords.z, 5.0) then
+		local vehicle
+
+		if IsPedInAnyVehicle(playerPed, false) then
+			vehicle = GetVehiclePedIsIn(playerPed, false)
+		else
+			vehicle = GetClosestVehicle(coords.x, coords.y, coords.z, 5.0, 0, 71)
+		end
+
+		if DoesEntityExist(vehicle) then
+			CreateThread(function()
+				SetVehicleFixed(vehicle)
+				SetVehicleDeformationFixed(vehicle)
+				SetVehicleUndriveable(vehicle, false)
+				ESX.ShowNotification(_U('success.veh_repaired'))
+			end)
+		end
+	end
 end)
 
 local function getVehicleFromVehList(hash)
