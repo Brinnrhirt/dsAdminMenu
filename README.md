@@ -28,17 +28,17 @@ The [qb-adminmenu](https://github.com/Disabled-Coding/dc-adminmenu/wiki) convert
     - Open Inventory
     - Give Clothing Menu
 
-2. Administration
+3. Administration
     - Kick
     - Ban system that checks up if you're banned (only for the ban with the menu)
     - Permissions
-3. Vehicles Options
+4. Vehicles Options
     - Spawn Vehicle
     - Own the vehicle you're sit in (If its not owned)
     - Delete Vehicle
     - Set Max Mods on the vehicle
     - Fix Vehicle
-4. Player Information List
+5. Player Information List
 
 All of those you can set up the permissions for each rank (between the ranks you have on your server, on the Config side)
 
