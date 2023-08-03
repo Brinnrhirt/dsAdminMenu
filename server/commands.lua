@@ -3,6 +3,7 @@
     or delete some of the commands, thank you for buying my script!
 ]]
 local ESX = exports['es_extended']:getSharedObject()
+
 ESX.RegisterCommand('maxmods', Config.Permissions['maxmods'], function(xPlayer, args, showError)
     local src = xPlayer.source
     TriggerClientEvent('dsAdminMenu:client:maxmodVehicle', src)
@@ -29,11 +30,13 @@ ESX.RegisterCommand('noclip', Config.Permissions['noclip'], function(xPlayer, ar
 end, false)
 
 ESX.RegisterCommand('admin', Config.Permissions['adminmenu'], function(xPlayer, args, showError)
-    TriggerClientEvent('dsAdminMenu:client:openMenu', xPlayer.source)
+    local src = xPlayer.source
+    TriggerClientEvent('dsAdminMenu:client:openMenu', src)
 end, false)
 
 ESX.RegisterCommand('admincar', Config.Permissions['admincar'], function(xPlayer, args, showError)
-    TriggerClientEvent('qb-dsAdminMenu:client:SaveCar', source)
+    local src = xPlayer.source
+    TriggerClientEvent('dsAdminMenu:client:SaveCar', src)
 end, false)
 
 ESX.RegisterCommand('kickall', 'admin', function(xPlayer, args, showError)

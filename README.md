@@ -31,6 +31,7 @@ The [qb-adminmenu](https://github.com/Disabled-Coding/dc-adminmenu/wiki) convert
     - Mute Player
 4. Player Information List
 
+I deleted the Dealers menu because you need qb-drugs in order to use it
 
 # Dependencies
  * [es_extended](https://github.com/esx-framework/esx_core)

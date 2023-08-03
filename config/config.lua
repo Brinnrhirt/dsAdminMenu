@@ -1,8 +1,7 @@
 Config = {}
-Config.ESXVersion = 'new' -- New For the ESX GetSharedObject Export or old for the TriggerEvent
+Config.ESXOldVersion = false -- If you're using the old version (not legacy), remove the line 12 in the fxmanifest.lua
 Config.Locale = 'es' -- en, es
 Config.Discord = ''
-Config.MenuLocation = 'topright' -- e.g. topright (default), topleft, bottomright, bottomleft
 Config.Inventory = 'ox_inventory' -- only ox_inventory or custom (change the code on the server side)
 Config.Clothing = 'illenium_appearance' -- only illenium_appearnce, esx_skin or custom (change the code on the client side)
 Config.ReviveTrigger = 'esx_ambulancejob' -- only esx_ambulancejob or custom

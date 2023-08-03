@@ -7,9 +7,12 @@ version '1.2.0'
 
 ui_page 'html/index.html'
 
+
 shared_scripts {
+    '@es_extended/imports.lua',
     'config/config.lua',
     'config/locale.lua',
+    'config/vehicles.lua',
     'locales/*.lua',
 }
 
