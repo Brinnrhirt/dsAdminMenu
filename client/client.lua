@@ -1,15 +1,5 @@
-ESX = nil
-Citizen.CreateThread(function()
-    if Config.ESXVersion == 'new' then
-        ESX = exports['es_extended']:getSharedObject()
-    else
-        while ESX == nil do
-            TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
-            Citizen.Wait(0)
-        end
 
-    end
-end)
+ESX = exports['es_extended']:getSharedObject()
 
 local banlength = nil
 local developermode = false
@@ -17,22 +7,20 @@ local showCoords = false
 local vehicleDevMode = false
 local banreason = 'Unknown'
 local kickreason = 'Unknown'
-local menuLocation = Config.MenuLocation
-
+local menuLocation = 'topright' -- e.g. topright (default), topleft, bottomright, bottomleft
 -- Main Menus
-local menu1 = MenuV:CreateMenu(false, _U("menu.admin_menu"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test1')
+menu1 = MenuV:CreateMenu(false, _U("menu.admin_menu"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test1')
 local menu2 = MenuV:CreateMenu(false, _U("menu.admin_options"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test2')
 local menu3 = MenuV:CreateMenu(false, _U("menu.manage_server"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test3')
 local menu4 = MenuV:CreateMenu(false, _U("menu.online_players"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test4')
 local menu5 = MenuV:CreateMenu(false, _U("menu.vehicle_options"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test5')
-local menu6 = MenuV:CreateMenu(false, _U("menu.dealer_list"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test6')
 local menu7 = MenuV:CreateMenu(false, _U("menu.developer_options"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test7')
 
 --Sub Menus
 local menu8 = MenuV:CreateMenu(false, _U("menu.weather_conditions"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test8')
 local menu9 = MenuV:CreateMenu(false, _U("menu.ban"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test9')
 local menu10 = MenuV:CreateMenu(false, _U("menu.kick"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test10')
-local menu11 = MenuV:CreateMenu(false, _U("menu.permissions"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test11')
+menu11 = MenuV:CreateMenu(false, _U("menu.permissions"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test11')
 local menu12 = MenuV:CreateMenu(false, _U("menu.vehicle_categories"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test12')
 local menu13 = MenuV:CreateMenu(false, _U("menu.vehicle_models"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test13')
 local menu14 = MenuV:CreateMenu(false, _U("menu.entity_view_options"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test14')
@@ -75,14 +63,6 @@ menu1:AddButton({
     label = _U("menu.vehicles"),
     value = menu5,
     description = _U("desc.vehicles_desc")
-})
-
---dealer list
-local menu1_dealer_list = menu1:AddButton({
-    icon = '💊',
-    label = _U("menu.dealer_list"),
-    value = menu6,
-    description = _U("desc.dealer_desc")
 })
 
 --developer options
@@ -331,12 +311,6 @@ local menu7_dev_vehicle_mode = menu7:AddCheckbox({
     description = _U("desc.vehicle_dev_mode_desc")
 })
 
-local menu7_dev_info_mode = menu7:AddCheckbox({
-    icon = '⚫',
-    label = _U("menu.hud_dev_mode"),
-    value = nil,
-    description = _U("desc.hud_dev_mode_desc")
-})
 
 local menu7_dev_noclip = menu7:AddCheckbox({
     icon = '🎥',
@@ -404,7 +378,7 @@ end)
 
 -- Revive Self
 menu2_admin_revive:On('select', function(_)
-    TriggerEvent('hospital:client:Revive', PlayerPedId())
+    TriggerEvent('dsAdminMenu:client:revive', PlayerPedId())
 end)
 
 -- Invisible
@@ -434,81 +408,20 @@ menu2_admin_god_mode:On('change', function(_, _, _)
 end)
 
 -- Weapons list
-for k,v in pairs(ESX.GetWeaponList()) do
+local Weapons = ESX.GetWeaponList()
+for i=1, #Weapons, 1 do
     menu15:AddButton({icon = '🎁',
-        label = v[k].label ,
-        value = v[k].name ,
+        label = Weapons[i].label ,
+        value = Weapons[i].name ,
         description = _U("desc.spawn_weapons_desc"),
-        select = function(k)
-            TriggerServerEvent('dsAdminMenu:giveWeapon', v[k].name)
+        select = function(_)
+            TriggerServerEvent('dsAdminMenu:giveWeapon', Weapons[i].name)
             ESX.ShowNotification(_U("success.spawn_weapon"))
         end
     })
 end
 
 
---[[
-    Player Management Options functions
---]]
--- Player List
-local function OpenPermsMenu(permsply)
-    ESX.RegisterServerCallback('dsAdminMenu:server:getrank', function(rank)
-        if rank then
-            local selectedgroup = 'Unknown'
-            MenuV:OpenMenu(menu11)
-            menu11:ClearItems()
-            menu11:AddSlider({
-                icon = '',
-                label = 'Group',
-                value = 'user',
-                values = {{
-                    label = 'User',
-                    value = 'user',
-                    description = 'Group'
-                }, {
-                    label = 'Admin',
-                    value = 'admin',
-                    description = 'Group'
-                }, {
-                    label = 'God',
-                    value = 'god',
-                    description = 'Group'
-                }},
-                change = function(_, newValue, _)
-                    local vcal = newValue
-                    if vcal == 1 then
-                        selectedgroup = {}
-                        selectedgroup[#selectedgroup+1] = {rank = "user", label = "User"}
-                    elseif vcal == 2 then
-                        selectedgroup = {}
-                        selectedgroup[#selectedgroup+1] = {rank = "admin", label = "Admin"}
-                    elseif vcal == 3 then
-                        selectedgroup = {}
-                        selectedgroup[#selectedgroup+1] = {rank = "god", label = "God"}
-                    end
-                end
-            })
-
-            menu11:AddButton({
-                icon = '',
-                label = _U("info.confirm"),
-                value = "giveperms",
-                description = 'Give the permission group',
-                select = function(_)
-                    if selectedgroup ~= 'Unknown' then
-                        TriggerServerEvent('dsAdminMenu:server:setPermissions', permsply.id, selectedgroup)
-                        ESX.ShowNotification(_U("success.changed_perm"), 'success')
-                        selectedgroup = 'Unknown'
-                    else
-                        ESX.ShowNotification(_U("error.changed_perm_failed"), 'error')
-                    end
-                end
-            })
-        else
-            MenuV:CloseMenu(menu1)
-        end
-    end)
-end
 
 local function OpenKickMenu(kickplayer)
     MenuV:OpenMenu(menu10)
@@ -733,7 +646,7 @@ end
 
 player_management:On('select', function(_)
     menu4:ClearItems()
-    ESX.RegisterServerCallback('test:getplayers', function(players)
+    ESX.TriggerServerCallback('test:getplayers', function(players)
         for _, v in pairs(players) do
             menu4:AddButton({
                 label = _U("info.id") .. v["id"] .. ' | ' .. v["name"],
@@ -870,7 +783,8 @@ end)
 
 -- Set vehicle Categories
 local vehicles = {}
-for k, v in pairs(Config.Vehicles) do
+
+for k, v in pairs(VehiclesList) do
     local category = v["category"]
     if vehicles[category] == nil then
         vehicles[category] = { }
@@ -888,7 +802,7 @@ local function OpenCarModelsMenu(category)
             value = k,
             description = 'Spawn ' .. v["name"],
             select = function(_)
-                ExecuteCommand("car" ..k)
+                ExecuteCommand("car " ..k)
             end
         })
     end
@@ -898,7 +812,7 @@ menu5_vehicles_spawn:On('Select', function(_)
     menu12:ClearItems()
     for k, v in pairs(vehicles) do
         menu12:AddButton({
-            label = QBCore.Shared.FirstToUpper(k),
+            label = FirstToUpper(k),
             value = v,
             description = _U("menu.category_name"),
             select = function(btn)
@@ -922,7 +836,7 @@ menu5_vehicles_remove:On('Select', function(_)
 end)
 
 menu5_vehicles_max_upgrades:On('Select', function(_)
-    ExecuteCommand("maxmods", {})
+    ExecuteCommand("maxmods")
 end)
 
 --[[
@@ -1009,16 +923,6 @@ local entity_view_object = menu14:AddCheckbox({
     value = nil,
     description = _U("desc.entity_view_objects_desc")
 })
-
-menu7_dev_info_mode:On('change', function(_, _, _)
-    developermode = not developermode
-    TriggerEvent('dsAdminMenu:client:ToggleDevmode')
-    if developermode then
-	SetPlayerInvincible(PlayerId(), true)
-    else
-	SetPlayerInvincible(PlayerId(), false)
-    end
-end)
 
 entity_view_freeaim:On('change', function(_, _, _)
     ToggleEntityFreeView()
@@ -1196,60 +1100,8 @@ entity_view_ped:On('change', function()
     ToggleEntityPedView()
 end)
 
---[[
-    Dealer List
---]]
-local function OpenDealerMenu(dealer)
-    local EditDealer = MenuV:CreateMenu(false, _U("menu.edit_dealer") .. dealer["name"], menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv')
-    EditDealer:ClearItems()
-    MenuV:OpenMenu(EditDealer)
-    local elements = {
-        [1] = {
-            icon = '➡️',
-            label = _U("info.goto") .. " " .. dealer["name"],
-            value = "goto",
-            description = _U("desc.dealergoto_desc") .. " " .. dealer["name"]
-        },
-        [2] = {
-            icon = "☠",
-            label = _U("info.remove") .. " " .. dealer["name"],
-            value = "remove",
-            description = _U("desc.dealerremove_desc") .. " " .. dealer["name"]
-        }
-    }
-    for _, v in ipairs(elements) do
-        EditDealer:AddButton({
-            icon = v.icon,
-            label = ' ' .. v.label,
-            value = v.value,
-            description = v.description,
-            select = function(btn)
-                local values = btn.Value
-                if values == "goto" then
-                    ExecuteCommand("dealergoto "..dealer["name"])
-                elseif values == "remove" then
-                    ExecuteCommand("deletedealer "..dealer["name"])
-                    EditDealer:Close()
-                    menu6:Close()
-                end
-            end
-        })
-    end
-end
 
-menu1_dealer_list:On('Select', function(_)
-    menu6:ClearItems()
-    ESX.RegisterServerCallback('test:getdealers', function(dealers)
-        for _, v in pairs(dealers) do
-            menu6:AddButton({
-                label = v["name"],
-                value = v,
-                description = _U("menu.dealer_name"),
-                select = function(btn)
-                    local select = btn.Value
-                    OpenDealerMenu(select)
-                end
-            })
-        end
-    end)
-end)
+function FirstToUpper(value)
+    if not value then return nil end
+    return (value:gsub("^%l", string.upper))
+end

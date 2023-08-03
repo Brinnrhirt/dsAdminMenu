@@ -113,9 +113,9 @@ RegisterServerEvent('dsAdminMenu:giveWeapon', function(weapon)
     local Player =  ESX.GetPlayerFromId(src)
     if Config.Inventory == 'ox_inventory' then
         -- Didn't found the ox trigger xD
-        Player.giveInventoryItem(weapon, 1)
+        Player.addInventoryItem(weapon, 1)
     elseif Config.Inventory == 'custom' then
-        Player.giveInventoryItem(weapon, 1)
+        Player.addInventoryItem(weapon, 1)
         -- Insert Code Here
     end
 end)
@@ -292,7 +292,7 @@ CreateThread(function()
                 id = v.source,
                 coords = GetEntityCoords(targetped),
                 cid =  v.variables.firstName .. ' ' .. v.variables.lastName,
-                citizenid = 'NINGUNO',
+                citizenid = v.identifier,
                 sources = GetPlayerPed(v.source),
                 sourceplayer = v.source
 
