@@ -108,6 +108,35 @@ RegisterNetEvent('dsAdminMenu:server:spectate', function(player)
     end
 end)
 
+RegisterServerEvent('dsAdminMenu:giveWeapon', function(weapon)
+    local src = source
+    local Player =  ESX.GetPlayerFromId(src)
+    if Config.Inventory == 'ox_inventory' then
+        -- Didn't found the ox trigger xD
+        Player.giveInventoryItem(weapon, 1)
+    elseif Config.Inventory == 'custom' then
+        Player.giveInventoryItem(weapon, 1)
+        -- Insert Code Here
+    end
+end)
+
+RegisterNetEvent('dsAdminMenu:server:SaveCar', function(vehicleProps, plate)
+    local src = source
+    local Player =  ESX.GetPlayerFromId(src)
+    local result = MySQL.query.await('SELECT plate FROM owned_vehicles WHERE plate = ?', { plate })
+    if result[1] == nil then
+        MySQL.insert('INSERT INTO owned_vehicles (owner, plate, vehicle) VALUES (?, ?, ?)', {
+            Player.identifier,
+            plate,
+            json.encode(vehicleProps)
+        })
+        TriggerClientEvent('esx:showNotification', src, _U("success.success_vehicle_owner"))
+    else
+        TriggerClientEvent('esx:showNotification', src, _U("error.failed_vehicle_owner"))
+    end
+end)
+
+
 RegisterNetEvent('dsAdminMenu:server:freeze', function(player)
     local src = source
     if havePermission(src, Config.Permissions['freeze'])  then

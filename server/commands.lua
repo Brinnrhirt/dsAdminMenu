@@ -32,6 +32,10 @@ ESX.RegisterCommand('admin', Config.Permissions['adminmenu'], function(xPlayer, 
     TriggerClientEvent('dsAdminMenu:client:openMenu', xPlayer.source)
 end, false)
 
+ESX.RegisterCommand('admincar', Config.Permissions['admincar'], function(xPlayer, args, showError)
+    TriggerClientEvent('qb-dsAdminMenu:client:SaveCar', source)
+end, false)
+
 ESX.RegisterCommand('kickall', 'admin', function(xPlayer, args, showError)
     local src = xPlayer.source
     if src > 0 then

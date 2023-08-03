@@ -20,25 +20,25 @@ local kickreason = 'Unknown'
 local menuLocation = Config.MenuLocation
 
 -- Main Menus
-local menu1 = MenuV:CreateMenu(false, Lang:t("menu.admin_menu"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test1')
-local menu2 = MenuV:CreateMenu(false, Lang:t("menu.admin_options"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test2')
-local menu3 = MenuV:CreateMenu(false, Lang:t("menu.manage_server"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test3')
-local menu4 = MenuV:CreateMenu(false, Lang:t("menu.online_players"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test4')
-local menu5 = MenuV:CreateMenu(false, Lang:t("menu.vehicle_options"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test5')
-local menu6 = MenuV:CreateMenu(false, Lang:t("menu.dealer_list"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test6')
-local menu7 = MenuV:CreateMenu(false, Lang:t("menu.developer_options"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test7')
+local menu1 = MenuV:CreateMenu(false, _U("menu.admin_menu"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test1')
+local menu2 = MenuV:CreateMenu(false, _U("menu.admin_options"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test2')
+local menu3 = MenuV:CreateMenu(false, _U("menu.manage_server"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test3')
+local menu4 = MenuV:CreateMenu(false, _U("menu.online_players"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test4')
+local menu5 = MenuV:CreateMenu(false, _U("menu.vehicle_options"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test5')
+local menu6 = MenuV:CreateMenu(false, _U("menu.dealer_list"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test6')
+local menu7 = MenuV:CreateMenu(false, _U("menu.developer_options"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test7')
 
 --Sub Menus
-local menu8 = MenuV:CreateMenu(false, Lang:t("menu.weather_conditions"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test8')
-local menu9 = MenuV:CreateMenu(false, Lang:t("menu.ban"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test9')
-local menu10 = MenuV:CreateMenu(false, Lang:t("menu.kick"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test10')
-local menu11 = MenuV:CreateMenu(false, Lang:t("menu.permissions"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test11')
-local menu12 = MenuV:CreateMenu(false, Lang:t("menu.vehicle_categories"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test12')
-local menu13 = MenuV:CreateMenu(false, Lang:t("menu.vehicle_models"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test13')
-local menu14 = MenuV:CreateMenu(false, Lang:t("menu.entity_view_options"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test14')
-local menu15 = MenuV:CreateMenu(false, Lang:t("menu.spawn_weapons"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test15')
+local menu8 = MenuV:CreateMenu(false, _U("menu.weather_conditions"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test8')
+local menu9 = MenuV:CreateMenu(false, _U("menu.ban"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test9')
+local menu10 = MenuV:CreateMenu(false, _U("menu.kick"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test10')
+local menu11 = MenuV:CreateMenu(false, _U("menu.permissions"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test11')
+local menu12 = MenuV:CreateMenu(false, _U("menu.vehicle_categories"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test12')
+local menu13 = MenuV:CreateMenu(false, _U("menu.vehicle_models"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test13')
+local menu14 = MenuV:CreateMenu(false, _U("menu.entity_view_options"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test14')
+local menu15 = MenuV:CreateMenu(false, _U("menu.spawn_weapons"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test15')
 
-RegisterNetEvent('qb-admin:client:openMenu', function()
+RegisterNetEvent('dsAdminMenu:client:openMenu', function()
     MenuV:OpenMenu(menu1)
 end)
 
@@ -48,49 +48,49 @@ end)
 -- Admin options
 menu1:AddButton({
     icon = '😃',
-    label = Lang:t("menu.admin_options"),
+    label = _U("menu.admin_options"),
     value = menu2,
-    description = Lang:t("desc.admin_options_desc")
+    description = _U("desc.admin_options_desc")
 })
 
 --player management
 local player_management = menu1:AddButton({
     icon = '🙍‍♂️',
-    label = Lang:t("menu.player_management"),
+    label = _U("menu.player_management"),
     value = menu4,
-    description = Lang:t("desc.player_management_desc")
+    description = _U("desc.player_management_desc")
 })
 
 --server management
 menu1:AddButton({
     icon = '🎮',
-    label = Lang:t("menu.server_management"),
+    label = _U("menu.server_management"),
     value = menu3,
-    description = Lang:t("desc.server_management_desc")
+    description = _U("desc.server_management_desc")
 })
 
 --vehicle spawner
 menu1:AddButton({
     icon = '🚗',
-    label = Lang:t("menu.vehicles"),
+    label = _U("menu.vehicles"),
     value = menu5,
-    description = Lang:t("desc.vehicles_desc")
+    description = _U("desc.vehicles_desc")
 })
 
 --dealer list
 local menu1_dealer_list = menu1:AddButton({
     icon = '💊',
-    label = Lang:t("menu.dealer_list"),
+    label = _U("menu.dealer_list"),
     value = menu6,
-    description = Lang:t("desc.dealer_desc")
+    description = _U("desc.dealer_desc")
 })
 
 --developer options
 menu1:AddButton({
     icon = '🔧',
-    label = Lang:t("menu.developer_options"),
+    label = _U("menu.developer_options"),
     value = menu7,
-    description = Lang:t("desc.developer_desc")
+    description = _U("desc.developer_desc")
 })
 
 --[[
@@ -100,262 +100,259 @@ menu1:AddButton({
 -- Admin Options Menu Buttons
 local menu2_admin_noclip = menu2:AddCheckbox({
     icon = '🎥',
-    label = Lang:t("menu.noclip"),
+    label = _U("menu.noclip"),
     value = nil,
-    description = Lang:t("desc.noclip_desc")
+    description = _U("desc.noclip_desc")
 })
 
 local menu2_admin_revive = menu2:AddButton({
     icon = '🏥',
-    label = Lang:t("menu.revive"),
+    label = _U("menu.revive"),
     value = 'revive',
-    description = Lang:t("desc.revive_desc")
+    description = _U("desc.revive_desc")
 })
 
 local menu2_admin_invisible = menu2:AddCheckbox({
     icon = '👻',
-    label = Lang:t("menu.invisible"),
+    label = _U("menu.invisible"),
     value = nil,
-    description = Lang:t("desc.invisible_desc")
+    description = _U("desc.invisible_desc")
 })
 
 local menu2_admin_god_mode = menu2:AddCheckbox({
     icon = '⚡',
-    label = Lang:t("menu.god"),
+    label = _U("menu.god"),
     value = nil,
-    description = Lang:t("desc.god_desc")
+    description = _U("desc.god_desc")
 })
 
 local menu2_admin_display_names = menu2:AddCheckbox({
     icon = '📋',
-    label = Lang:t("menu.names"),
+    label = _U("menu.names"),
     value = nil,
-    description = Lang:t("desc.names_desc")
+    description = _U("desc.names_desc")
 })
 
 local menu2_admin_display_blips = menu2:AddCheckbox({
     icon = '📍',
-    label = Lang:t("menu.blips"),
+    label = _U("menu.blips"),
     value = nil,
-    description = Lang:t("desc.blips_desc")
+    description = _U("desc.blips_desc")
 })
 
 --give weapons
 menu2:AddButton({
     icon = '🎁',
-    label = Lang:t("menu.spawn_weapons"),
+    label = _U("menu.spawn_weapons"),
     value = menu15,
-    description = Lang:t("desc.spawn_weapons_desc")
+    description = _U("desc.spawn_weapons_desc")
 })
 
 -- Server Options Menu Buttons
 local menu3_server_weather = menu3:AddButton({
     icon = '🌡️',
-    label = Lang:t("menu.weather_options"),
+    label = _U("menu.weather_options"),
     value = menu8,
-    description = Lang:t("desc.weather_desc")
+    description = _U("desc.weather_desc")
 })
 
 local menu3_server_time = menu3:AddSlider({
     icon = '⏲️',
-    label = Lang:t("menu.server_time"),
+    label = _U("menu.server_time"),
     value = GetClockHours(),
     values = {{
         label = '00',
         value = '00',
-        description = Lang:t("menu.time")
+        description = _U("menu.time")
     }, {
         label = '01',
         value = '01',
-        description = Lang:t("menu.time")
+        description = _U("menu.time")
     }, {
         label = '02',
         value = '02',
-        description = Lang:t("menu.time")
+        description = _U("menu.time")
     }, {
         label = '03',
         value = '03',
-        description = Lang:t("menu.time")
+        description = _U("menu.time")
     }, {
         label = '04',
         value = '04',
-        description = Lang:t("menu.time")
+        description = _U("menu.time")
     }, {
         label = '05',
         value = '05',
-        description = Lang:t("menu.time")
+        description = _U("menu.time")
     }, {
         label = '06',
         value = '06',
-        description = Lang:t("menu.time")
+        description = _U("menu.time")
     }, {
         label = '07',
         value = '07',
-        description = Lang:t("menu.time")
+        description = _U("menu.time")
     }, {
         label = '08',
         value = '08',
-        description = Lang:t("menu.time")
+        description = _U("menu.time")
     }, {
         label = '09',
         value = '09',
-        description = Lang:t("menu.time")
+        description = _U("menu.time")
     }, {
         label = '10',
         value = '10',
-        description = Lang:t("menu.time")
+        description = _U("menu.time")
     }, {
         label = '11',
         value = '11',
-        description = Lang:t("menu.time")
+        description = _U("menu.time")
     }, {
         label = '12',
         value = '12',
-        description = Lang:t("menu.time")
+        description = _U("menu.time")
     }, {
         label = '13',
         value = '13',
-        description = Lang:t("menu.time")
+        description = _U("menu.time")
     }, {
         label = '14',
         value = '14',
-        description = Lang:t("menu.time")
+        description = _U("menu.time")
     }, {
         label = '15',
         value = '15',
-        description = Lang:t("menu.time")
+        description = _U("menu.time")
     }, {
         label = '16',
         value = '16',
-        description = Lang:t("menu.time")
+        description = _U("menu.time")
     }, {
         label = '17',
         value = '17',
-        description = Lang:t("menu.time")
+        description = _U("menu.time")
     }, {
         label = '18',
         value = '18',
-        description = Lang:t("menu.time")
+        description = _U("menu.time")
     }, {
         label = '19',
         value = '19',
-        description = Lang:t("menu.time")
+        description = _U("menu.time")
     }, {
         label = '20',
         value = '20',
-        description = Lang:t("menu.time")
+        description = _U("menu.time")
     }, {
         label = '21',
         value = '21',
-        description = Lang:t("menu.time")
+        description = _U("menu.time")
     }, {
         label = '22',
         value = '22',
-        description = Lang:t("menu.time")
+        description = _U("menu.time")
     }, {
         label = '23',
         value = '23',
-        description = Lang:t("menu.time")
+        description = _U("menu.time")
     }}
 })
 
 -- Vehicle Spawner Menu Buttons
 local menu5_vehicles_spawn = menu5:AddButton({
     icon = '🚗',
-    label = Lang:t("menu.spawn_vehicle"),
+    label = _U("menu.spawn_vehicle"),
     value = menu12,
-    description = Lang:t("desc.spawn_vehicle_desc")
+    description = _U("desc.spawn_vehicle_desc")
 })
 
 local menu5_vehicles_fix = menu5:AddButton({
     icon = '🔧',
-    label = Lang:t("menu.fix_vehicle"),
+    label = _U("menu.fix_vehicle"),
     value = 'fix',
-    description = Lang:t("desc.fix_vehicle_desc")
+    description = _U("desc.fix_vehicle_desc")
 })
 
 local menu5_vehicles_buy = menu5:AddButton({
     icon = '💲',
-    label = Lang:t("menu.buy"),
+    label = _U("menu.buy"),
     value = 'buy',
-    description = Lang:t("desc.buy_desc")
+    description = _U("desc.buy_desc")
 })
 
 local menu5_vehicles_remove = menu5:AddButton({
     icon = '🗑️',
-    label = Lang:t("menu.remove_vehicle"),
+    label = _U("menu.remove_vehicle"),
     value = 'remove',
-    description = Lang:t("desc.remove_vehicle_desc")
+    description = _U("desc.remove_vehicle_desc")
 })
 
 local menu5_vehicles_max_upgrades = menu5:AddButton({
     icon = '⚡️',
-    label = Lang:t("menu.max_mods"),
+    label = _U("menu.max_mods"),
     value = 'maxmods',
-    description = Lang:t("desc.max_mod_desc")
+    description = _U("desc.max_mod_desc")
 })
 
 -- Developer Options Menu Buttons
 local menu7_dev_copy_vec3 = menu7:AddButton({
     icon = '📋',
-    label = Lang:t("menu.copy_vector3"),
+    label = _U("menu.copy_vector3"),
     value = 'coords',
-    description = Lang:t("desc.vector3_desc")
+    description = _U("desc.vector3_desc")
 })
 
 local menu7_dev_copy_vec4 = menu7:AddButton({
     icon = '📋',
-    label = Lang:t("menu.copy_vector4"),
+    label = _U("menu.copy_vector4"),
     value = 'coords',
-    description = Lang:t("desc.vector4_desc")
+    description = _U("desc.vector4_desc")
 })
 
 local menu7_dev_copy_heading = menu7:AddButton({
     icon = '📋',
-    label = Lang:t("menu.copy_heading"),
+    label = _U("menu.copy_heading"),
     value = 'heading',
-    description = Lang:t("desc.copy_heading_desc")
+    description = _U("desc.copy_heading_desc")
 })
 
 local menu7_dev_toggle_coords = menu7:AddCheckbox({
     icon = '📍',
-    label = Lang:t("menu.display_coords"),
+    label = _U("menu.display_coords"),
     value = nil,
-    description = Lang:t("desc.display_coords_desc")
+    description = _U("desc.display_coords_desc")
 })
 
 local menu7_dev_vehicle_mode = menu7:AddCheckbox({
     icon = '🚘',
-    label = Lang:t("menu.vehicle_dev_mode"),
+    label = _U("menu.vehicle_dev_mode"),
     value = nil,
-    description = Lang:t("desc.vehicle_dev_mode_desc")
+    description = _U("desc.vehicle_dev_mode_desc")
 })
 
 local menu7_dev_info_mode = menu7:AddCheckbox({
     icon = '⚫',
-    label = Lang:t("menu.hud_dev_mode"),
+    label = _U("menu.hud_dev_mode"),
     value = nil,
-    description = Lang:t("desc.hud_dev_mode_desc")
+    description = _U("desc.hud_dev_mode_desc")
 })
 
 local menu7_dev_noclip = menu7:AddCheckbox({
     icon = '🎥',
-    label = Lang:t("menu.noclip"),
+    label = _U("menu.noclip"),
     value = nil,
-    description = Lang:t("desc.noclip_desc")
+    description = _U("desc.noclip_desc")
 })
 
 --create dev entity view
 menu7:AddButton({
     icon = '🔍',
-    label = Lang:t("menu.entity_view_options"),
+    label = _U("menu.entity_view_options"),
     value = menu14,
-    description = Lang:t("desc.entity_view_desc")
+    description = _U("desc.entity_view_desc")
 })
 
---[[
-    QB Core Admin Menu button functions below.
---]]
 
 --[[
     General Functions
@@ -392,12 +389,12 @@ end
 --]]
 -- Toggle player name display
 menu2_admin_display_names:On('change', function()
-    TriggerEvent('qb-admin:client:toggleNames')
+    TriggerEvent('dsAdminMenu:client:toggleNames')
 end)
 
 -- Toggle player blip display
 menu2_admin_display_blips:On('change', function()
-    TriggerEvent('qb-admin:client:toggleBlips')
+    TriggerEvent('dsAdminMenu:client:toggleBlips')
 end)
 
 -- Toggle NoClip
@@ -437,14 +434,14 @@ menu2_admin_god_mode:On('change', function(_, _, _)
 end)
 
 -- Weapons list
-for _,v in pairs(QBCore.Shared.Weapons) do
+for k,v in pairs(ESX.GetWeaponList()) do
     menu15:AddButton({icon = '🎁',
-        label = v.label ,
-        value = v.value ,
-        description = Lang:t("desc.spawn_weapons_desc"),
-        select = function(_)
-            TriggerServerEvent('qb-admin:giveWeapon', v.name)
-            QBCore.Functions.Notify(Lang:t("success.spawn_weapon"))
+        label = v[k].label ,
+        value = v[k].name ,
+        description = _U("desc.spawn_weapons_desc"),
+        select = function(k)
+            TriggerServerEvent('dsAdminMenu:giveWeapon', v[k].name)
+            ESX.ShowNotification(_U("success.spawn_weapon"))
         end
     })
 end
@@ -455,7 +452,7 @@ end
 --]]
 -- Player List
 local function OpenPermsMenu(permsply)
-    QBCore.Functions.TriggerCallback('qb-admin:server:getrank', function(rank)
+    ESX.RegisterServerCallback('dsAdminMenu:server:getrank', function(rank)
         if rank then
             local selectedgroup = 'Unknown'
             MenuV:OpenMenu(menu11)
@@ -494,16 +491,16 @@ local function OpenPermsMenu(permsply)
 
             menu11:AddButton({
                 icon = '',
-                label = Lang:t("info.confirm"),
+                label = _U("info.confirm"),
                 value = "giveperms",
                 description = 'Give the permission group',
                 select = function(_)
                     if selectedgroup ~= 'Unknown' then
-                        TriggerServerEvent('qb-admin:server:setPermissions', permsply.id, selectedgroup)
-                        QBCore.Functions.Notify(Lang:t("success.changed_perm"), 'success')
+                        TriggerServerEvent('dsAdminMenu:server:setPermissions', permsply.id, selectedgroup)
+                        ESX.ShowNotification(_U("success.changed_perm"), 'success')
                         selectedgroup = 'Unknown'
                     else
-                        QBCore.Functions.Notify(Lang:t("error.changed_perm_failed"), 'error')
+                        ESX.ShowNotification(_U("error.changed_perm_failed"), 'error')
                     end
                 end
             })
@@ -518,25 +515,25 @@ local function OpenKickMenu(kickplayer)
     menu10:ClearItems()
     menu10:AddButton({
         icon = '',
-        label = Lang:t("info.reason"),
+        label = _U("info.reason"),
         value = "reason",
-        description = Lang:t("desc.kick_reason"),
+        description = _U("desc.kick_reason"),
         select = function(_)
-            kickreason = LocalInput(Lang:t("desc.kick_reason"), 255)
+            kickreason = LocalInput(_U("desc.kick_reason"), 255)
         end
     })
 
     menu10:AddButton({
         icon = '',
-        label = Lang:t("info.confirm"),
+        label = _U("info.confirm"),
         value = "kick",
-        description = Lang:t("desc.confirm_kick"),
+        description = _U("desc.confirm_kick"),
         select = function(_)
             if kickreason ~= 'Unknown' then
-                TriggerServerEvent('qb-admin:server:kick', kickplayer, kickreason)
+                TriggerServerEvent('dsAdminMenu:server:kick', kickplayer, kickreason)
                 kickreason = 'Unknown'
             else
-                QBCore.Functions.Notify(Lang:t("error.missing_reason"), 'error')
+                ESX.ShowNotification(_U("error.missing_reason"), 'error')
             end
         end
     })
@@ -547,66 +544,66 @@ local function OpenBanMenu(banplayer)
     menu9:ClearItems()
     menu9:AddButton({
         icon = '',
-        label = Lang:t("info.reason"),
+        label = _U("info.reason"),
         value = "reason",
-        description = Lang:t("desc.ban_reason"),
+        description = _U("desc.ban_reason"),
         select = function(_)
-            banreason = LocalInput(Lang:t("desc.ban_reason"), 255)
+            banreason = LocalInput(_U("desc.ban_reason"), 255)
         end
     })
 
     menu9:AddSlider({
         icon = '⏲️',
-        label = Lang:t("info.length"),
+        label = _U("info.length"),
         value = '3600',
         values = {{
-            label = Lang:t("time.1hour"),
+            label = _U("time.1hour"),
             value = '3600',
-            description = Lang:t("time.ban_length")
+            description = _U("time.ban_length")
         }, {
-            label = Lang:t("time.6hour"),
+            label = _U("time.6hour"),
             value ='21600',
-            description = Lang:t("time.ban_length")
+            description = _U("time.ban_length")
         }, {
-            label = Lang:t("time.12hour"),
+            label = _U("time.12hour"),
             value = '43200',
-            description = Lang:t("time.ban_length")
+            description = _U("time.ban_length")
         }, {
-            label = Lang:t("time.1day"),
+            label = _U("time.1day"),
             value = '86400',
-            description = Lang:t("time.ban_length")
+            description = _U("time.ban_length")
         }, {
-            label = Lang:t("time.3day"),
+            label = _U("time.3day"),
             value = '259200',
-            description = Lang:t("time.ban_length")
+            description = _U("time.ban_length")
         }, {
-            label = Lang:t("time.1week"),
+            label = _U("time.1week"),
             value = '604800',
-            description = Lang:t("time.ban_length")
+            description = _U("time.ban_length")
         }, {
-            label = Lang:t("time.1month"),
+            label = _U("time.1month"),
             value = '2678400',
-            description = Lang:t("time.ban_length")
+            description = _U("time.ban_length")
         }, {
-            label = Lang:t("time.3month"),
+            label = _U("time.3month"),
             value = '8035200',
-            description = Lang:t("time.ban_length")
+            description = _U("time.ban_length")
         }, {
-            label = Lang:t("time.6month"),
+            label = _U("time.6month"),
             value = '16070400',
-            description = Lang:t("time.ban_length")
+            description = _U("time.ban_length")
         }, {
-            label = Lang:t("time.1year"),
+            label = _U("time.1year"),
             value = '32140800',
-            description = Lang:t("time.ban_length")
+            description = _U("time.ban_length")
         }, {
-            label = Lang:t("time.permenent"),
+            label = _U("time.permenent"),
             value = '99999999999',
-            description = Lang:t("time.ban_length")
+            description = _U("time.ban_length")
         }, {
-            label = Lang:t("time.self"),
+            label = _U("time.self"),
             value = "self",
-            description = Lang:t("time.ban_length")
+            description = _U("time.ban_length")
         }},
         select = function(_, newValue, _)
             if newValue == "self" then
@@ -619,97 +616,97 @@ local function OpenBanMenu(banplayer)
 
     menu9:AddButton({
         icon = '',
-        label = Lang:t("info.confirm"),
+        label = _U("info.confirm"),
         value = "ban",
-        description = Lang:t("desc.confirm_ban"),
+        description = _U("desc.confirm_ban"),
         select = function(_)
             if banreason ~= 'Unknown' and banlength ~= nil then
-                TriggerServerEvent('qb-admin:server:ban', banplayer, banlength, banreason)
+                TriggerServerEvent('dsAdminMenu:server:ban', banplayer, banlength, banreason)
                 banreason = 'Unknown'
                 banlength = nil
             else
-                QBCore.Functions.Notify(Lang:t("error.invalid_reason_length_ban"), 'error')
+                ESX.ShowNotification(_U("error.invalid_reason_length_ban"), 'error')
             end
         end
     })
 end
 
 local function OpenPlayerMenus(player)
-    local Players = MenuV:CreateMenu(false, player.cid .. Lang:t("info.options"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv') -- Players Sub Menu
+    local Players = MenuV:CreateMenu(false, player.cid .. _U("info.options"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv') -- Players Sub Menu
     Players:ClearItems()
     MenuV:OpenMenu(Players)
     local elements = {
         [1] = {
             icon = '💀',
-            label = Lang:t("menu.kill"),
+            label = _U("menu.kill"),
             value = "kill",
-            description = Lang:t("menu.kill").. " " .. player.cid
+            description = _U("menu.kill").. " " .. player.cid
         },
         [2] = {
             icon = '🏥',
-            label = Lang:t("menu.revive"),
+            label = _U("menu.revive"),
             value = "revive",
-            description = Lang:t("menu.revive") .. " " .. player.cid
+            description = _U("menu.revive") .. " " .. player.cid
         },
         [3] = {
             icon = '🥶',
-            label = Lang:t("menu.freeze"),
+            label = _U("menu.freeze"),
             value = "freeze",
-            description = Lang:t("menu.freeze") .. " " .. player.cid
+            description = _U("menu.freeze") .. " " .. player.cid
         },
         [4] = {
             icon = '👀',
-            label = Lang:t("menu.spectate"),
+            label = _U("menu.spectate"),
             value = "spectate",
-            description = Lang:t("menu.spectate") .. " " .. player.cid
+            description = _U("menu.spectate") .. " " .. player.cid
         },
         [5] = {
             icon = '➡️',
-            label = Lang:t("info.goto"),
+            label = _U("info.goto"),
             value = "goto",
-            description = Lang:t("info.goto") .. " " .. player.cid .. Lang:t("info.position")
+            description = _U("info.goto") .. " " .. player.cid .. _U("info.position")
         },
         [6] = {
             icon = '⬅️',
-            label = Lang:t("menu.bring"),
+            label = _U("menu.bring"),
             value = "bring",
-            description = Lang:t("menu.bring") .. " " .. player.cid .. " " .. Lang:t("info.your_position")
+            description = _U("menu.bring") .. " " .. player.cid .. " " .. _U("info.your_position")
         },
         [7] = {
             icon = '🚗',
-            label = Lang:t("menu.sit_in_vehicle"),
+            label = _U("menu.sit_in_vehicle"),
             value = "intovehicle",
-            description = Lang:t("desc.sit_in_veh_desc") .. " " .. player.cid .. " " .. Lang:t("desc.sit_in_veh_desc2")
+            description = _U("desc.sit_in_veh_desc") .. " " .. player.cid .. " " .. _U("desc.sit_in_veh_desc2")
         },
         [8] = {
             icon = '🎒',
-            label = Lang:t("menu.open_inv"),
+            label = _U("menu.open_inv"),
             value = "inventory",
-            description = Lang:t("info.open") .. " " .. player.cid .. Lang:t("info.inventories")
+            description = _U("info.open") .. " " .. player.cid .. _U("info.inventories")
         },
         [9] = {
             icon = '👕',
-            label = Lang:t("menu.give_clothing_menu"),
+            label = _U("menu.give_clothing_menu"),
             value = "cloth",
-            description = Lang:t("desc.clothing_menu_desc") .. " " .. player.cid
+            description = _U("desc.clothing_menu_desc") .. " " .. player.cid
         },
         [10] = {
             icon = '🥾',
-            label = Lang:t("menu.kick"),
+            label = _U("menu.kick"),
             value = "kick",
-            description = Lang:t("menu.kick") .. " " .. player.cid .. " " .. Lang:t("info.reason")
+            description = _U("menu.kick") .. " " .. player.cid .. " " .. _U("info.reason")
         },
         [11] = {
             icon = '🚫',
-            label = Lang:t("menu.ban"),
+            label = _U("menu.ban"),
             value = "ban",
-            description = Lang:t("menu.ban") .. " " .. player.cid .. " " .. Lang:t("info.reason")
+            description = _U("menu.ban") .. " " .. player.cid .. " " .. _U("info.reason")
         },
         [12] = {
             icon = '🎟️',
-            label = Lang:t("menu.permissions"),
+            label = _U("menu.permissions"),
             value = "perms",
-            description = Lang:t("info.give") .. " " .. player.cid .. " " .. Lang:t("menu.permissions")
+            description = _U("info.give") .. " " .. player.cid .. " " .. _U("menu.permissions")
         }
     }
     for _, v in ipairs(elements) do
@@ -721,7 +718,7 @@ local function OpenPlayerMenus(player)
             select = function(btn)
                 local values = btn.Value
                 if values ~= "ban" and values ~= "kick" and values ~= "perms" then
-                    TriggerServerEvent('qb-admin:server:'..values, player)
+                    TriggerServerEvent('dsAdminMenu:server:'..values, player)
                 elseif values == "ban" then
                     OpenBanMenu(player)
                 elseif values == "kick" then
@@ -736,12 +733,12 @@ end
 
 player_management:On('select', function(_)
     menu4:ClearItems()
-    QBCore.Functions.TriggerCallback('test:getplayers', function(players)
+    ESX.RegisterServerCallback('test:getplayers', function(players)
         for _, v in pairs(players) do
             menu4:AddButton({
-                label = Lang:t("info.id") .. v["id"] .. ' | ' .. v["name"],
+                label = _U("info.id") .. v["id"] .. ' | ' .. v["name"],
                 value = v,
-                description = Lang:t("info.player_name"),
+                description = _U("info.player_name"),
                 select = function(btn)
                     local select = btn.Value -- get all the values from v!
                     OpenPlayerMenus(select) -- only pass what i select nothing else
@@ -762,101 +759,101 @@ menu3_server_weather:On("select",function()
     local elements = {
         [1] = {
             icon = '☀️',
-            label = Lang:t("weather.extra_sunny"),
+            label = _U("weather.extra_sunny"),
             value = "EXTRASUNNY",
-            description = Lang:t("weather.extra_sunny_desc")
+            description = _U("weather.extra_sunny_desc")
         },
         [2] = {
             icon = '☀️',
-            label = Lang:t("weather.clear"),
+            label = _U("weather.clear"),
             value = "CLEAR",
-            description = Lang:t("weather.clear_desc")
+            description = _U("weather.clear_desc")
         },
         [3] = {
             icon = '☀️',
-            label = Lang:t("weather.neutral"),
+            label = _U("weather.neutral"),
             value = "NEUTRAL",
-            description = Lang:t("weather.neutral_desc")
+            description = _U("weather.neutral_desc")
         },
         [4] = {
             icon = '🌁',
-            label = Lang:t("weather.smog"),
+            label = _U("weather.smog"),
             value = "SMOG",
-            description = Lang:t("weather.smog_desc")
+            description = _U("weather.smog_desc")
         },
         [5] = {
             icon = '🌫️',
-            label = Lang:t("weather.foggy"),
+            label = _U("weather.foggy"),
             value = "FOGGY",
-            description = Lang:t("weather.foggy_desc")
+            description = _U("weather.foggy_desc")
         },
         [6] = {
             icon = '⛅',
-            label = Lang:t("weather.overcast"),
+            label = _U("weather.overcast"),
             value = "OVERCAST",
-            description = Lang:t("weather.overcast_desc")
+            description = _U("weather.overcast_desc")
         },
         [7] = {
             icon = '☁️',
-            label = Lang:t("weather.clouds"),
+            label = _U("weather.clouds"),
             value = "CLOUDS",
-            description = Lang:t("weather.clouds_desc")
+            description = _U("weather.clouds_desc")
         },
         [8] = {
             icon = '🌤️',
-            label = Lang:t("weather.clearing"),
+            label = _U("weather.clearing"),
             value = "CLEARING",
-            description = Lang:t("weather.clearing_desc")
+            description = _U("weather.clearing_desc")
         },
         [9] = {
             icon = '☂️',
-            label = Lang:t("weather.rain"),
+            label = _U("weather.rain"),
             value = "RAIN",
-            description = Lang:t("weather.rain_desc")
+            description = _U("weather.rain_desc")
         },
 
         [10] = {
             icon = '⛈️',
-            label = Lang:t("weather.thunder"),
+            label = _U("weather.thunder"),
             value = "THUNDER",
-            description = Lang:t("weather.thunder_desc")
+            description = _U("weather.thunder_desc")
         },
         [11] = {
             icon = '❄️',
-            label = Lang:t("weather.snow"),
+            label = _U("weather.snow"),
             value = "SNOW",
-            description = Lang:t("weather.snow_desc")
+            description = _U("weather.snow_desc")
         },
         [12] = {
             icon = '🌨️',
-            label = Lang:t("weather.blizzard"),
+            label = _U("weather.blizzard"),
             value = "BLIZZARD",
-            description = Lang:t("weather.blizzed_desc")
+            description = _U("weather.blizzed_desc")
         },
         [13] = {
             icon = '❄️',
-            label = Lang:t("weather.light_snow"),
+            label = _U("weather.light_snow"),
             value = "SNOWLIGHT",
-            description = Lang:t("weather.light_snow_desc")
+            description = _U("weather.light_snow_desc")
         },
         [14] = {
             icon = '🌨️',
-            label = Lang:t("weather.heavy_snow"),
+            label = _U("weather.heavy_snow"),
             value = "XMAS",
-            description = Lang:t("weather.heavy_snow_desc")
+            description = _U("weather.heavy_snow_desc")
         },
         [15] = {
             icon = '🎃',
-            label = Lang:t("weather.halloween"),
+            label = _U("weather.halloween"),
             value = "HALLOWEEN",
-            description = Lang:t("weather.halloween_desc")
+            description = _U("weather.halloween_desc")
         }
     }
     for _, v in ipairs(elements) do
         menu8:AddButton({icon = v.icon,label = v.label,value = v,description = v.description,select = function(btn)
             local selection = btn.Value
             TriggerServerEvent('qb-weathersync:server:setWeather', selection.value)
-            QBCore.Functions.Notify(Lang:t("weather.weather_changed", {value = selection.label}))
+            ESX.ShowNotification(_U("weather.weather_changed", {value = selection.label}))
         end})
     end
 end)
@@ -864,7 +861,7 @@ end)
 -- Adjust time on change
 menu3_server_time:On("select", function(_, value)
     TriggerServerEvent("qb-weathersync:server:setTime", value, value)
-    QBCore.Functions.Notify(Lang:t("time.changed", {time = value}))
+    ESX.ShowNotification(_U("time.changed", {time = value}))
 end)
 
 --[[
@@ -873,7 +870,7 @@ end)
 
 -- Set vehicle Categories
 local vehicles = {}
-for k, v in pairs(QBCore.Shared.Vehicles) do
+for k, v in pairs(Config.Vehicles) do
     local category = v["category"]
     if vehicles[category] == nil then
         vehicles[category] = { }
@@ -891,7 +888,7 @@ local function OpenCarModelsMenu(category)
             value = k,
             description = 'Spawn ' .. v["name"],
             select = function(_)
-                TriggerServerEvent('QBCore:CallCommand', "car", { k })
+                ExecuteCommand("car" ..k)
             end
         })
     end
@@ -903,7 +900,7 @@ menu5_vehicles_spawn:On('Select', function(_)
         menu12:AddButton({
             label = QBCore.Shared.FirstToUpper(k),
             value = v,
-            description = Lang:t("menu.category_name"),
+            description = _U("menu.category_name"),
             select = function(btn)
                 local select = btn.Value
                 OpenCarModelsMenu(select)
@@ -913,19 +910,19 @@ menu5_vehicles_spawn:On('Select', function(_)
 end)
 
 menu5_vehicles_fix:On('Select', function(_)
-    TriggerServerEvent('QBCore:CallCommand', "fix", {})
+    ExecuteCommand("fix")
 end)
 
 menu5_vehicles_buy:On('Select', function(_)
-    TriggerServerEvent('QBCore:CallCommand', "admincar", {})
+    ExecuteCommand("admincar")
 end)
 
 menu5_vehicles_remove:On('Select', function(_)
-    TriggerServerEvent('QBCore:CallCommand', "dv", {})
+    ExecuteCommand("dv")
 end)
 
 menu5_vehicles_max_upgrades:On('Select', function(_)
-    TriggerServerEvent('QBCore:CallCommand', "maxmods", {})
+    ExecuteCommand("maxmods", {})
 end)
 
 --[[
@@ -933,89 +930,89 @@ end)
 --]]
 local entity_view_distance = menu14:AddSlider({
     icon = '📏',
-    label = Lang:t("menu.entity_view_distance"),
+    label = _U("menu.entity_view_distance"),
     value = GetCurrentEntityViewDistance(),
     values = {{
         label = '5',
         value = '5',
-        description = Lang:t("menu.entity_view_distance")
+        description = _U("menu.entity_view_distance")
     }, {
         label = '10',
         value = '10',
-        description = Lang:t("menu.entity_view_distance")
+        description = _U("menu.entity_view_distance")
     }, {
         label = '15',
         value = '15',
-        description = Lang:t("menu.entity_view_distance")
+        description = _U("menu.entity_view_distance")
     }, {
         label = '20',
         value = '20',
-        description = Lang:t("menu.entity_view_distance")
+        description = _U("menu.entity_view_distance")
     }, {
         label = '25',
         value = '25',
-        description = Lang:t("menu.entity_view_distance")
+        description = _U("menu.entity_view_distance")
     }, {
         label = '30',
         value = '30',
-        description = Lang:t("menu.entity_view_distance")
+        description = _U("menu.entity_view_distance")
     }, {
         label = '35',
         value = '35',
-        description = Lang:t("menu.entity_view_distance")
+        description = _U("menu.entity_view_distance")
     }, {
         label = '40',
         value = '40',
-        description = Lang:t("menu.entity_view_distance")
+        description = _U("menu.entity_view_distance")
     }, {
         label = '45',
         value = '45',
-        description = Lang:t("menu.entity_view_distance")
+        description = _U("menu.entity_view_distance")
     }, {
         label = '50',
         value = '50',
-        description = Lang:t("menu.entity_view_distance")
+        description = _U("menu.entity_view_distance")
     }}
 })
 
 local entity_view_copy_info = menu14:AddButton({
     icon = '📋',
-    label = Lang:t("menu.entity_view_freeaim_copy"),
+    label = _U("menu.entity_view_freeaim_copy"),
     value = 'freeaimEntity',
-    description = Lang:t("desc.entity_view_freeaim_copy_desc")
+    description = _U("desc.entity_view_freeaim_copy_desc")
 })
 
 local entity_view_freeaim = menu14:AddCheckbox({
     icon = '🔫',
-    label = Lang:t("menu.entity_view_freeaim"),
+    label = _U("menu.entity_view_freeaim"),
     value = nil,
-    description = Lang:t("desc.entity_view_freeaim_desc")
+    description = _U("desc.entity_view_freeaim_desc")
 })
 
 local entity_view_vehicle = menu14:AddCheckbox({
     icon = '🚗',
-    label = Lang:t("menu.entity_view_vehicles"),
+    label = _U("menu.entity_view_vehicles"),
     value = nil,
-    description = Lang:t("desc.entity_view_vehicles_desc")
+    description = _U("desc.entity_view_vehicles_desc")
 })
 
 local entity_view_ped = menu14:AddCheckbox({
     icon = '🧍‍♂‍',
-    label = Lang:t("menu.entity_view_peds"),
+    label = _U("menu.entity_view_peds"),
     value = nil,
-    description = Lang:t("desc.entity_view_peds_desc")
+    description = _U("desc.entity_view_peds_desc")
 })
 
 local entity_view_object = menu14:AddCheckbox({
     icon = '📦',
-    label = Lang:t("menu.entity_view_objects"),
+    label = _U("menu.entity_view_objects"),
     value = nil,
-    description = Lang:t("desc.entity_view_objects_desc")
+    description = _U("desc.entity_view_objects_desc")
 })
 
 menu7_dev_info_mode:On('change', function(_, _, _)
     developermode = not developermode
-    TriggerEvent('qb-admin:client:ToggleDevmode')
+    TriggerEvent('dsAdminMenu:client:ToggleDevmode')
     if developermode then
 	SetPlayerInvincible(PlayerId(), true)
     else
@@ -1031,39 +1028,39 @@ local function CopyToClipboard(dataType)
     local ped = PlayerPedId()
     if dataType == 'coords2' then
         local coords = GetEntityCoords(ped)
-        local x = QBCore.Shared.Round(coords.x, 2)
-        local y = QBCore.Shared.Round(coords.y, 2)
+        local x = ESX.Math.Round(coords.x, 2)
+        local y = ESX.Math.Round(coords.y, 2)
         SendNUIMessage({
             string = string.format('vector2(%s, %s)', x, y)
         })
-        QBCore.Functions.Notify(Lang:t("success.coords_copied"), "success")
+        ESX.ShowNotification(_U("success.coords_copied"), "success")
     elseif dataType == 'coords3' then
         local coords = GetEntityCoords(ped)
-        local x = QBCore.Shared.Round(coords.x, 2)
-        local y = QBCore.Shared.Round(coords.y, 2)
-        local z = QBCore.Shared.Round(coords.z, 2)
+        local x = ESX.Math.Round(coords.x, 2)
+        local y = ESX.Math.Round(coords.y, 2)
+        local z = ESX.Math.Round(coords.z, 2)
         SendNUIMessage({
             string = string.format('vector3(%s, %s, %s)', x, y, z)
         })
-        QBCore.Functions.Notify(Lang:t("success.coords_copied"), "success")
+        ESX.ShowNotification(_U("success.coords_copied"), "success")
     elseif dataType == 'coords4' then
         local coords = GetEntityCoords(ped)
-        local x = QBCore.Shared.Round(coords.x, 2)
-        local y = QBCore.Shared.Round(coords.y, 2)
-        local z = QBCore.Shared.Round(coords.z, 2)
+        local x = ESX.Math.Round(coords.x, 2)
+        local y = ESX.Math.Round(coords.y, 2)
+        local z = ESX.Math.Round(coords.z, 2)
         local heading = GetEntityHeading(ped)
-        local h = QBCore.Shared.Round(heading, 2)
+        local h = ESX.Math.Round(heading, 2)
         SendNUIMessage({
             string = string.format('vector4(%s, %s, %s, %s)', x, y, z, h)
         })
-        QBCore.Functions.Notify(Lang:t("success.coords_copied"), "success")
+        ESX.ShowNotification(_U("success.coords_copied"), "success")
     elseif dataType == 'heading' then
         local heading = GetEntityHeading(ped)
-        local h = QBCore.Shared.Round(heading, 2)
+        local h = ESX.Math.Round(heading, 2)
         SendNUIMessage({
             string = h
         })
-        QBCore.Functions.Notify(Lang:t("success.heading_copied"), "success")
+        ESX.ShowNotification(_U("success.heading_copied"), "success")
     elseif dataType == 'freeaimEntity' then
         local entity = GetFreeAimEntity()
 
@@ -1073,24 +1070,24 @@ local function CopyToClipboard(dataType)
             local entityCoords = GetEntityCoords(entity)
             local entityHeading = GetEntityHeading(entity)
             local entityRotation = GetEntityRotation(entity)
-            local x = QBCore.Shared.Round(entityCoords.x, 2)
-            local y = QBCore.Shared.Round(entityCoords.y, 2)
-            local z = QBCore.Shared.Round(entityCoords.z, 2)
-            local rotX = QBCore.Shared.Round(entityRotation.x, 2)
-            local rotY = QBCore.Shared.Round(entityRotation.y, 2)
-            local rotZ = QBCore.Shared.Round(entityRotation.z, 2)
-            local h = QBCore.Shared.Round(entityHeading, 2)
+            local x = ESX.Math.Round(entityCoords.x, 2)
+            local y = ESX.Math.Round(entityCoords.y, 2)
+            local z = ESX.Math.Round(entityCoords.z, 2)
+            local rotX = ESX.Math.Round(entityRotation.x, 2)
+            local rotY = ESX.Math.Round(entityRotation.y, 2)
+            local rotZ = ESX.Math.Round(entityRotation.z, 2)
+            local h = ESX.Math.Round(entityHeading, 2)
             SendNUIMessage({
                 string = string.format('Model Name:\t%s\nModel Hash:\t%s\n\nHeading:\t%s\nCoords:\t\tvector3(%s, %s, %s)\nRotation:\tvector3(%s, %s, %s)', entityName, entityHash, h, x, y, z, rotX, rotY, rotZ)
             })
-            QBCore.Functions.Notify(Lang:t("success.entity_copy"), "success")
+            ESX.ShowNotification(_U("success.entity_copy"), "success")
         else
-            QBCore.Functions.Notify(Lang:t("error.failed_entity_copy"), "error")
+            ESX.ShowNotification(_U("error.failed_entity_copy"), "error")
         end
     end
 end
 
-RegisterNetEvent('qb-admin:client:copyToClipboard', function(dataType)
+RegisterNetEvent('dsAdminMenu:client:copyToClipboard', function(dataType)
     CopyToClipboard(dataType)
 end)
 
@@ -1116,12 +1113,12 @@ local function ToggleShowCoordinates()
             local coords = GetEntityCoords(PlayerPedId())
             local heading = GetEntityHeading(PlayerPedId())
             local c = {}
-            c.x = QBCore.Shared.Round(coords.x, 2)
-            c.y = QBCore.Shared.Round(coords.y, 2)
-            c.z = QBCore.Shared.Round(coords.z, 2)
-            heading = QBCore.Shared.Round(heading, 2)
+            c.x = ESX.Math.Round(coords.x, 2)
+            c.y = ESX.Math.Round(coords.y, 2)
+            c.z = ESX.Math.Round(coords.z, 2)
+            heading = ESX.Math.Round(heading, 2)
             Wait(0)
-            Draw2DText(string.format('~w~'..Lang:t("info.ped_coords") .. '~b~ vector4(~w~%s~b~, ~w~%s~b~, ~w~%s~b~, ~w~%s~b~)', c.x, c.y, c.z, heading), 4, {66, 182, 245}, 0.4, x + 0.0, y + 0.0)
+            Draw2DText(string.format('~w~'.._U("info.ped_coords") .. '~b~ vector4(~w~%s~b~, ~w~%s~b~, ~w~%s~b~, ~w~%s~b~)', c.x, c.y, c.z, heading), 4, {66, 182, 245}, 0.4, x + 0.0, y + 0.0)
         end
     end)
 end
@@ -1141,16 +1138,16 @@ local function ToggleVehicleDeveloperMode()
                 local modelName = GetLabelText(GetDisplayNameFromVehicleModel(hash))
                 local eHealth = GetVehicleEngineHealth(vehicle)
                 local bHealth = GetVehicleBodyHealth(vehicle)
-                Draw2DText(Lang:t("info.vehicle_dev_data"), 4, {66, 182, 245}, 0.4, x + 0.0, y + 0.0)
-                Draw2DText(string.format(Lang:t("info.ent_id") .. '~b~%s~s~ | ' .. Lang:t("info.net_id") .. '~b~%s~s~', vehicle, netID), 4, {255, 255, 255}, 0.4, x + 0.0, y + 0.025)
-                Draw2DText(string.format(Lang:t("info.model") .. '~b~%s~s~ | ' .. Lang:t("info.hash") .. '~b~%s~s~', modelName, hash), 4, {255, 255, 255}, 0.4, x + 0.0, y + 0.050)
-                Draw2DText(string.format(Lang:t("info.eng_health") .. '~b~%s~s~ | ' .. Lang:t("info.body_health") .. '~b~%s~s~', QBCore.Shared.Round(eHealth, 2), QBCore.Shared.Round(bHealth, 2)), 4, {255, 255, 255}, 0.4, x + 0.0, y + 0.075)
+                Draw2DText(_U("info.vehicle_dev_data"), 4, {66, 182, 245}, 0.4, x + 0.0, y + 0.0)
+                Draw2DText(string.format(_U("info.ent_id") .. '~b~%s~s~ | ' .. _U("info.net_id") .. '~b~%s~s~', vehicle, netID), 4, {255, 255, 255}, 0.4, x + 0.0, y + 0.025)
+                Draw2DText(string.format(_U("info.model") .. '~b~%s~s~ | ' .. _U("info.hash") .. '~b~%s~s~', modelName, hash), 4, {255, 255, 255}, 0.4, x + 0.0, y + 0.050)
+                Draw2DText(string.format(_U("info.eng_health") .. '~b~%s~s~ | ' .. _U("info.body_health") .. '~b~%s~s~', ESX.Math.Round(eHealth, 2), ESX.Math.Round(bHealth, 2)), 4, {255, 255, 255}, 0.4, x + 0.0, y + 0.075)
             end
         end
     end)
 end
 
-RegisterNetEvent('qb-admin:client:ToggleCoords', function()
+RegisterNetEvent('dsAdminMenu:client:ToggleCoords', function()
     ToggleShowCoordinates()
 end)
 
@@ -1184,7 +1181,7 @@ end)
 
 entity_view_distance:On("select", function(_, value)
     SetEntityViewDistance(value)
-    QBCore.Functions.Notify(Lang:t("info.entity_view_distance", {distance = value}))
+    ESX.ShowNotification(_U("info.entity_view_distance", {distance = value}))
 end)
 
 entity_view_vehicle:On('change', function()
@@ -1203,21 +1200,21 @@ end)
     Dealer List
 --]]
 local function OpenDealerMenu(dealer)
-    local EditDealer = MenuV:CreateMenu(false, Lang:t("menu.edit_dealer") .. dealer["name"], menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv')
+    local EditDealer = MenuV:CreateMenu(false, _U("menu.edit_dealer") .. dealer["name"], menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv')
     EditDealer:ClearItems()
     MenuV:OpenMenu(EditDealer)
     local elements = {
         [1] = {
             icon = '➡️',
-            label = Lang:t("info.goto") .. " " .. dealer["name"],
+            label = _U("info.goto") .. " " .. dealer["name"],
             value = "goto",
-            description = Lang:t("desc.dealergoto_desc") .. " " .. dealer["name"]
+            description = _U("desc.dealergoto_desc") .. " " .. dealer["name"]
         },
         [2] = {
             icon = "☠",
-            label = Lang:t("info.remove") .. " " .. dealer["name"],
+            label = _U("info.remove") .. " " .. dealer["name"],
             value = "remove",
-            description = Lang:t("desc.dealerremove_desc") .. " " .. dealer["name"]
+            description = _U("desc.dealerremove_desc") .. " " .. dealer["name"]
         }
     }
     for _, v in ipairs(elements) do
@@ -1229,9 +1226,9 @@ local function OpenDealerMenu(dealer)
             select = function(btn)
                 local values = btn.Value
                 if values == "goto" then
-                    TriggerServerEvent('QBCore:CallCommand', "dealergoto", { dealer["name"] })
+                    ExecuteCommand("dealergoto "..dealer["name"])
                 elseif values == "remove" then
-                    TriggerServerEvent('QBCore:CallCommand', "deletedealer", { dealer["name"] })
+                    ExecuteCommand("deletedealer "..dealer["name"])
                     EditDealer:Close()
                     menu6:Close()
                 end
@@ -1242,12 +1239,12 @@ end
 
 menu1_dealer_list:On('Select', function(_)
     menu6:ClearItems()
-    QBCore.Functions.TriggerCallback('test:getdealers', function(dealers)
+    ESX.RegisterServerCallback('test:getdealers', function(dealers)
         for _, v in pairs(dealers) do
             menu6:AddButton({
                 label = v["name"],
                 value = v,
-                description = Lang:t("menu.dealer_name"),
+                description = _U("menu.dealer_name"),
                 select = function(btn)
                     local select = btn.Value
                     OpenDealerMenu(select)
