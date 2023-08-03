@@ -44,7 +44,7 @@ Config.Permissions = { -- change this as your server permissions
 Config.EnableWebhooks = true
 
 Config.Webhook = { -- Only works if Config.EnableWebhooks its enabled
-    ['kick'] = 'https://discord.com/api/webhooks/1117978450075062272/kioK2eFV1TMli2N_TxguIrexePB09JKswHFx_Gn57wQLiP4EClHeMjYt9QcyKp3h78os',
-    ['bans'] = 'https://discord.com/api/webhooks/1117978450075062272/kioK2eFV1TMli2N_TxguIrexePB09JKswHFx_Gn57wQLiP4EClHeMjYt9QcyKp3h78os',
-    ['revive'] = 'https://discord.com/api/webhooks/1117978450075062272/kioK2eFV1TMli2N_TxguIrexePB09JKswHFx_Gn57wQLiP4EClHeMjYt9QcyKp3h78os',
+    ['kick'] = '',
+    ['bans'] = '',
+    ['revive'] = '',
 }
