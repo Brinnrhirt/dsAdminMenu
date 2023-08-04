@@ -50,3 +50,10 @@ All the testing part were on Legacy 1.9.1, If you want to do changes or fix it t
 # Dependencies
  * [es_extended](https://github.com/esx-framework/esx_core)
  * [menuv](https://github.com/ThymonA/menuv)
+
+
+# Video preview:
+ https://streamable.com/6b2uy9
+
+# Forum link:
+https://forum.cfx.re/t/free-esx-qb-admin-menu-converted-to-esx/5156086
